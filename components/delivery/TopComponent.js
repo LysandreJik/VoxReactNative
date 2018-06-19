@@ -37,9 +37,17 @@ const styles = {
     },
 
     profileImage: {
-        top: 5,
+        top: 3,
         width: (Dimensions.get('window').height/100)*8/1.5,
         height: (Dimensions.get('window').height/100)*8/1.5
+    },
+
+    ID: {
+        position: 'absolute',
+        width: "100%", height: "66%",
+        right: "8%", top: "8%",
+        alignItems: 'flex-end',
+        justifyContent: 'center'
     }
 };
 
@@ -50,12 +58,16 @@ export default class TopComponent extends React.Component{
                 {BlueBackgroundTop}
                 {VTop}
                 {WhiteAndBlueBackgroundTop}
-
+                {ID}
             </View>
         )
     }
 }
 
+const ID = <View style={styles.ID}>
+    <Text style={{color: 'white', fontSize: 12}}>配達番号: YMT583752</Text>
+    <Text style={{color: 'white', fontSize: 25}}>配達情報</Text>
+</View>
 
 const BlueBackgroundTop = <View style={styles.blueBackgroundTop}>
     <Svg width={Dimensions.get('window').width} height={Dimensions.get('window').height/4}>
@@ -78,7 +90,7 @@ const WhiteAndBlueBackgroundTop = <View style={styles.whiteAndblueBackgroundTop}
     <View style={styles.left}><Text>配達先</Text></View>
     <View style={styles.right}>
         <Image style={styles.profileImage} source={require('../../assets/images/profile.png')}/>
-        <Text style={{top: -7}}>     磯野 若芽</Text>
+        <Text style={{top: -9}}>     磯野 若芽</Text>
     </View>
 </View>;
 
