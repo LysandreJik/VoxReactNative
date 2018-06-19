@@ -1,23 +1,48 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import {StyleSheet, Text, View} from 'react-native';
+import Splash from './components/splashscreen/Splash';
+import {loadImages} from "./controller/LoadImages";
+import DeliveryInfo from "./components/delivery/DeliveryInfo";
+
+loadImages();
 
 export default class App extends React.Component {
-  render() {
-    return (
-      <View style={styles.container}>
-        <Text>Open up App.js to start working on your app!</Text>
-        <Text>Changes you make will automatically reload.</Text>
-        <Text>Shake your phone to open the developer menu.</Text>
-      </View>
-    );
-  }
+    constructor(){
+        super();
+
+        this.state = {showSplash: true};
+
+        this.terminateSplashScreen = this.terminateSplashScreen.bind(this);
+        this.getSplashScreen = this.getSplashScreen.bind(this);
+        this.getDeliveryInfo = this.getDeliveryInfo.bind(this);
+    }
+
+    terminateSplashScreen(){
+        this.setState({showSplash: false});
+    }
+
+    getSplashScreen(){
+        return <Splash terminateSplashScreen={this.terminateSplashScreen}/>;
+    }
+
+    getDeliveryInfo(){
+        return <DeliveryInfo/>;
+    }
+
+    render() {
+        return (
+            <View style={styles.container}>
+                {this.state.showSplash ? this.getSplashScreen() : this.getDeliveryInfo()}
+            </View>
+        );
+    }
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
+    container: {
+        flex: 1,
+        backgroundColor: '#fff',
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
 });
