@@ -1,5 +1,5 @@
 import React from 'react';
-import {Svg} from 'expo';
+import {Font, Svg} from 'expo';
 import {View, Text, Image, Dimensions} from 'react-native';
 
 const styles = {
@@ -32,6 +32,7 @@ const styles = {
         justifyContent: 'center',
         alignItems: 'flex-end',
         padding: 15,
+        paddingRight: 30,
         flexDirection: 'row',
 
     },
@@ -52,22 +53,36 @@ const styles = {
 };
 
 export default class TopComponent extends React.Component{
+
+
+    getTextStyle(size, weight){
+        let style = {fontSize: size};
+        style.fontFamily = "HiraginoSansW"+weight;
+        return style;
+    }
+
     render(){
         return(
             <View style={styles.topComponent}>
                 {BlueBackgroundTop}
                 {VTop}
-                {WhiteAndBlueBackgroundTop}
-                {ID}
+
+                <View style={styles.whiteAndblueBackgroundTop}>
+                    <View style={styles.left}><Text style={this.getTextStyle(15, 1)}>配達先</Text></View>
+                    <View style={styles.right}>
+                        <Image style={styles.profileImage} source={require('../../assets/images/profile.png')}/>
+                        <Text style={this.getTextStyle(15, 1)}>     磯野 若芽</Text>
+                    </View>
+                </View>
+
+                <View style={styles.ID}>
+                    <Text style={{...this.getTextStyle(12, 3), color: 'white'}}>配達番号: YMT583752</Text>
+                    <Text style={{...this.getTextStyle(25, 3), color: 'white'}}>配達情報</Text>
+                </View>
             </View>
         )
     }
 }
-
-const ID = <View style={styles.ID}>
-    <Text style={{color: 'white', fontSize: 12}}>配達番号: YMT583752</Text>
-    <Text style={{color: 'white', fontSize: 25}}>配達情報</Text>
-</View>
 
 const BlueBackgroundTop = <View style={styles.blueBackgroundTop}>
     <Svg width={Dimensions.get('window').width} height={Dimensions.get('window').height/4}>
@@ -84,14 +99,6 @@ const BlueBackgroundTop = <View style={styles.blueBackgroundTop}>
             <Svg.Path fill="url(#gradient_0)" fillOpacity="0.96862745" stroke="none" d="M0 0L375 0L375 207L0 207L0 0Z"/>
         </Svg.G>
     </Svg>
-</View>;
-
-const WhiteAndBlueBackgroundTop = <View style={styles.whiteAndblueBackgroundTop}>
-    <View style={styles.left}><Text>配達先</Text></View>
-    <View style={styles.right}>
-        <Image style={styles.profileImage} source={require('../../assets/images/profile.png')}/>
-        <Text style={{top: -9}}>     磯野 若芽</Text>
-    </View>
 </View>;
 
 const VTop = <View style={styles.vTop}>

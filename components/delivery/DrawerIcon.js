@@ -1,5 +1,5 @@
 import React from 'react'
-import { Ionicons } from '@expo/vector-icons';
+import {View, Image} from 'react-native'
 
 const styles = {
     container: {
@@ -12,7 +12,9 @@ const styles = {
 export default class DrawerIcon extends React.Component{
     render(){
         return(
-            <Ionicons style={styles.container} name="ios-menu" size={40} color="white" />
+            <View style={styles.container}>
+                <Image style={{width: 40, height: 40}} source={require('../../assets/images/openDrawer.png')}/>
+            </View>
         )
     }
 }

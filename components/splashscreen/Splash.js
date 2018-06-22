@@ -1,11 +1,26 @@
 import React from 'react';
-import {Svg} from 'expo';
+import {Font, Svg} from 'expo';
 import {View, Text, Image} from 'react-native';
 
-export default class Splash extends React.Component{
+const styles = {
+    top:{
+        backgroundColor: "#F5F8F9",
+        width: "100%",
+        height: "100%",
+        justifyContent: 'center',
+        alignItems: 'center'
+    }
+};
 
-    componentDidMount(){
-        setTimeout(() => this.props.terminateSplashScreen(), 100);
+export default class Splash extends React.Component{
+    async componentDidMount(){
+        await Font.loadAsync({
+            'HiraginoSansW1': require('../../assets/fonts/HiraginoSansW1.otf'),
+            'HiraginoSansW3': require('../../assets/fonts/HiraginoSansW3.otf'),
+        });
+
+        this.setState({ fontLoaded: true });
+        setTimeout(() => this.props.terminateSplashScreen(), 1000);
     }
 
     render(){
@@ -33,12 +48,3 @@ export default class Splash extends React.Component{
     }
 }
 
-const styles = {
-    top:{
-        backgroundColor: "#F5F8F9",
-        width: "100%",
-        height: "100%",
-        justifyContent: 'center',
-        alignItems: 'center'
-    }
-}

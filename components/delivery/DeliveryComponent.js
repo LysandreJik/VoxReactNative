@@ -1,6 +1,7 @@
 import React from 'react';
 import {View, Text, Image, Dimensions} from 'react-native';
 import DataComponent from "./DataComponent";
+import {Font} from "expo";
 
 const styles = {
     deliveryContainer: {
@@ -38,23 +39,37 @@ const styles = {
 
 
 export default class DeliveryComponent extends React.Component{
+    constructor(props){
+        super(props);
+
+        this.state = {fontLoaded: false};
+    }
+    async componentDidMount(){
+        await Font.loadAsync({
+            'HiraginoSansW1': require('../../assets/fonts/HiraginoSansW1.otf'),
+        });
+
+        this.setState({ fontLoaded: true });
+    }
+
+    getTextStyle(size){
+        let style = {fontSize: size};
+        this.state.fontLoaded ? style.fontFamily = "HiraginoSansW1" : "";
+        return style;
+    }
+
     render(){
         return(
             <View style={styles.deliveryContainer}>
-                {DeliveryStatus}
-                {DeliveryMethod}
+                <View style={styles.deliveryStatus}>
+                    <View style={styles.left}><Text style={this.getTextStyle(15)}>配達ステータス</Text></View>
+                    <View style={styles.right}><Text style={this.getTextStyle(15)}>未配達</Text></View>
+                </View>
+                <View style={styles.deliveryMethod}>
+                    <View style={styles.left}><Text style={this.getTextStyle(15)}>受取方法</Text></View>
+                    <View style={styles.right}><Text style={this.getTextStyle(15)}>宅配ボックス</Text></View>
+                </View>
             </View>
         )
     }
 }
-
-
-const DeliveryStatus = <View style={styles.deliveryStatus}>
-    <View style={styles.left}><Text>配達ステータス</Text></View>
-    <View style={styles.right}><Text>未配達</Text></View>
-</View>;
-
-const DeliveryMethod = <View style={styles.deliveryMethod}>
-    <View style={styles.left}><Text>受取方法</Text></View>
-    <View style={styles.right}><Text>宅配ボックス</Text></View>
-</View>;

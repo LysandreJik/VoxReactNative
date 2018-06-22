@@ -1,5 +1,5 @@
 import React from 'react';
-import {StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, Text, View, StatusBar} from 'react-native';
 import Splash from './components/splashscreen/Splash';
 import {loadImages} from "./controller/LoadImages";
 import DeliveryInfo from "./components/delivery/DeliveryInfo";
@@ -32,6 +32,10 @@ export default class App extends React.Component {
     render() {
         return (
             <View style={styles.container}>
+                <StatusBar
+                    backgroundColor="blue"
+                    barStyle="light-content"
+                />
                 {this.state.showSplash ? this.getSplashScreen() : this.getDeliveryInfo()}
             </View>
         );
